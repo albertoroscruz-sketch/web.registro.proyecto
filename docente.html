@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proyecto</title>
+    <link rel="icon" href="dd.png">
+</head>
+<body style="font-family: 'Arial', cursive, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: #ffffff;">
+
+
+<header style="background-color: #039aad;
+    color: white; padding: 10px 5px; 
+    display: flex; justify-content: space-between; 
+    align-items: center;">
+
+    <div style="display: flex; align-items: center;">
+        <img src="logo_.png" style="width: 250px; border-radius: 10px;">
+    </div>
+
+    <h1 style="margin: 0; font-size: 30px;">
+        REGISTRO
+    </h1>
+
+    <div style="display: flex; align-items: center;">
+        <img src="logo_blanco.png" style="width: 250px; border-radius: 10px;">
+    </div>
+
+</header>
+
+<br>
+<a href="index.html"
+  style=
+    "font-size: 15px;
+      padding: 10px 20px;
+      margin: 20px;
+      background-color: #039aad;
+      color: white;
+      border: none;">
+  Regresar
+</a>
+
+<h2 style="text-align: center;">
+    REGISTRO DOCENTE
+</h2>
+
+
+<form id="formDocente" onsubmit="guardarinformacion()"
+style="text-align: center; margin-top: 20px;">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required
+    style="padding: 10px; margin: 10px; width: 250px;">
+    <br>
+
+    <input type="number" id="edad" name="edad" placeholder="Edad" required
+    style="padding: 10px; margin: 10px; width: 250px;">
+    <br>
+
+    <input type="email" id="correo" name="correo" placeholder="Correo Electronico" required
+    style="padding: 10px; margin: 10px; width: 250px;">
+    <br>
+
+    <input type="text" id="matricula" name="matricula" placeholder="Matricula Empleado" required
+    style="padding: 10px; margin: 10px; width: 250px;">
+    <br>
+    <br>
+
+    <label style="font-family: Arial, Helvetica; font-size: 15px;">
+        Selecciona una opción sobre tu turno de trabajo
+        <br>
+    <select id="turno" name="turno" required
+    style="padding: 10px; margin: 10px; width: 250px;"> 
+        <option value="Matutino">Turno Matutino</option>
+        <option value="Vespertino">Turno Vespertino </option>
+        <option value="Nocturno">Turno Nocturno</option>
+    </select>
+    </label>
+    <br>
+
+     <!--ESTO ES DE LA PAGINA EMAIL JS-->
+    <input type="submit" id="button" value="confirmar y enviar email" 
+    style="padding: 10px 20px; margin: 20px; background: #039aad; color:#ffffff">
+
+
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('sxUeeeptryez-QIkS')
+</script>
+<!--ESTO ES DE LA PAGINA EMAIL JS-->
+</form>
+
+<script>
+function guardarinformacion()
+{
+    const nombre = document.getElementById("nombre").value;
+    const edad = document.getElementById("edad").value;
+    const correo = document.getElementById("correo").value;
+    const matricula = document.getElementById("matricula").value;
+   const turno = document.getElementById("turno").value;
+    document.body.innerHTML =
+    `<div style="font-family: Arial; padding: 40px; text-align: center;">
+    <h1>Confirmacion de registro</h1>
+    <p>Estimado/a <b> ${nombre}</b> su registro ha sido exitoso</p>
+    <p>Datos registrados:</p>
+    <p>Tu nombre es: <b> ${nombre} </b> </p>
+    <p>Tu edad es: <b> ${edad} </b> </p>
+    <p>Tu correo es: <b> ${correo} </b> </p>
+    <p>Tu numero de empleado es: <b> ${matricula} </b> </p>
+    <p>Tu turno es: <b> ${turno} </b> </p>
+    <br>
+    
+        <div>
+        <label>
+            Presiona el circulo si estás satisfecho/a con la pagina de registro:
+            <input type="radio"
+            style="padding: 10px;">
+        </label>
+        </div>
+    <br>
+
+   <a href="index.html"
+      style="padding:10px 20px; background:#039aad; color:white; border:none;">
+        Volver al inicio
+      </a>
+    </div>`;
+    
+}
+</script>
+
+
+</body>
+
+<footer style="background-color: #039aad; 
+font-family: Arial, Helvetica, sans-serif; 
+color: #ffffffd7;
+text-align: center; 
+padding: 15px 0; 
+margin-top: 20px;">
+
+    <ul style="list-style-position: inside; max-width: 500px; margin: 0 auto; text-align: justify; font-size: 16px; line-height: 1.6;">
+    Página creada por:
+    <li style="margin-top: 15px; margin-bottom: 5px;">
+        Pablo Pascual Gómez
+    </li>
+    <li style="margin-bottom: 5px;">
+        Alberto Rosado Cruz
+    </li>
+    </ul>
+
+
+</footer>
+
+<!--ESTO ES DE LA PAGINA EMAIL JS-->
+<script>
+    const btn = document.getElementById('button');
+    const formDocente = document.getElementById('formDocente');
+
+ formDocente.addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Enviando...';
+
+   const serviceID = 'default_service';
+   const templateID = 'template_q8kgqtv';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Enviar mensaje';
+      alert('Mensaje enviado correctamente!');
+    }, (err) => {
+      btn.value = 'Enviar mensaje';
+      alert(JSON.stringify(err));
+    });
+});
+</script>
+<!--ESTO ES DE LA PAGINA EMAIL JS-->
+</html>
